@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="100dp"
+        android:layout_height="29dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="29dp"
+        android:textStyle="bold"
+        android:text="Server Status :" />
+
+    <TextView
+        android:id="@+id/xml_production_status"
+        android:layout_width="309dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="45dp"
+        android:text="TextView"
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/xml_staging_status"
+        android:layout_width="308dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="109dp"
+
+        android:layout_marginEnd="46dp"
+        android:text="TextView"
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/xml_develop_status"
+        android:layout_width="307dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="140dp"
+        android:textColor="@color/red"
+
+        android:layout_marginEnd="47dp"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/xml_button_send"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="191dp"
+        android:layout_marginTop="456dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="51dp"
+        android:text="Send Command" />
+
+    <Button
+        android:id="@+id/xml_buton_startgame"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="191dp"
+        android:layout_marginTop="373dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="146dp"
+        android:text="Start Game" />
+
+
+</RelativeLayout>
