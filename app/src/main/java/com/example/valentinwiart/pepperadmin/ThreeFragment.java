@@ -9,7 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,8 +49,18 @@ public class ThreeFragment extends Fragment implements View.OnClickListener{
     public TextView xml_production_status ;
     public TextView xml_staging_status ;
     public TextView xml_develop_status ;
+    public TextView textToSpeech;
+    private int num_movement = 10000;
     private Button mButton;
     private Button mButton2;
+
+    private Button mButon_Reset;
+    private Button mButton_LoadGame;
+
+    private int nbr_questions = 2;
+    private Spinner spinner;
+    private static final String[] paths = {"1 question", "2 questions", "3 questions","4 questions","5 questions","6 questions","7 questions"};
+
 
     public ThreeFragment() {
         // Required empty public constructor
@@ -86,45 +99,53 @@ public class ThreeFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                try {
-                    production_status   = pingURL(production,200);
-                    staging_status      = pingURL(staging,200);
-                    develop_status      = pingURL(develop,200);
-                }
-                catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }).start();
-
 
         View view = inflater.inflate(R.layout.fragment_three, container, false);
-        xml_production_status = view.findViewById(R.id.xml_production_status);
-        xml_develop_status = view.findViewById(R.id.xml_develop_status);
-        xml_staging_status = view.findViewById(R.id.xml_staging_status);
-        xml_production_status.setText(production);
-        xml_develop_status.setText(develop);
-        xml_staging_status.setText(staging);
 
-        if(production_status){
-            xml_production_status.setTextColor(R.color.green);
-            Log.i("changement couleur","vert");
-        }
-        xml_staging_status.setTextColor(R.color.green);
-        xml_develop_status.setTextColor(R.color.green);
-        mButton = view.findViewById(R.id.xml_button_send);
+        textToSpeech = view.findViewById(R.id.xml_textToSpeech);
+
+        mButton = view.findViewById(R.id.xml_button_send_textToSpeech);
         mButton.setOnClickListener(this);
 
         mButton2 = view.findViewById(R.id.xml_buton_startgame);
         mButton2.setOnClickListener(this);
+
+
+        mButon_Reset = view.findViewById(R.id.xml_buton_reset);
+        mButon_Reset.setOnClickListener(this);
+
+
+
+        mButton_LoadGame= view.findViewById(R.id.xml_buton_loadGame);
+        mButton_LoadGame.setOnClickListener(this);
+
+        spinner = (Spinner)view.findViewById(R.id.xml_spinner_1);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_spinner_item,paths);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                nbr_questions = position + 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                nbr_questions = 2;
+            }
+        });
+
         return view;
     }
 
-    public void SendAction(String URL, int RequestMethod){
+    public void SendAction(String URL, int RequestMethod, int id_Movement, String Content, String Name, int Num_movement){
 
+        final int pid_Movement  = id_Movement;
+        final String pContent   = Content;
+        final String pName      = Name;
+        final int pNum_movement = Num_movement;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
@@ -143,8 +164,10 @@ public class ThreeFragment extends Fragment implements View.OnClickListener{
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("id_movement", "5");
-                params.put("name", "name");
+                params.put("id_movement", String.valueOf(pid_Movement));
+                params.put("content", pContent);
+                params.put("name", pName);
+                params.put("num_movement", String.valueOf(pNum_movement));
                 return params;
             }
 
@@ -161,16 +184,34 @@ public class ThreeFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
 
+
+            case R.id.xml_button_send_textToSpeech:
+                Toast.makeText(view.getContext(), "Button SendText Click :" +textToSpeech.getText().toString() , Toast.LENGTH_SHORT).show();
+                if (textToSpeech.getText().toString() == "")textToSpeech.setText("Bijour a touss");
+                num_movement = num_movement + 1 ;
+                SendAction(staging + "movement", Request.Method.POST,100,textToSpeech.getText().toString(),"TextToSpeech: "+textToSpeech.getText().toString(),num_movement);
+                break;
+
             case R.id.xml_buton_startgame:
                 Toast.makeText(view.getContext(), "Button Start Click" , Toast.LENGTH_SHORT).show();
-                SendAction(staging + "StartGameTimer", Request.Method.GET);
+                num_movement = num_movement + 1 ;
+                SendAction(staging + "StartGameTimer", Request.Method.POST,999,String.valueOf(nbr_questions),"Start Game",num_movement);
+                break;
+
+            case R.id.xml_buton_loadGame:
+                Toast.makeText(view.getContext(), "Button LoadGame Click" , Toast.LENGTH_SHORT).show();
+                num_movement = num_movement + 1 ;
+                SendAction(staging + "movement", Request.Method.POST,103,"","LoadGame",num_movement);
+                break;
+
+            case R.id.xml_buton_reset:
+                Toast.makeText(view.getContext(), "Button Reset Click" , Toast.LENGTH_SHORT).show();
+                num_movement = num_movement + 1 ;
+                SendAction(staging + "ResetGame", Request.Method.POST,9999,"","Reset Game",num_movement);
                 break;
 
 
-            case R.id.xml_button_send:
-                Toast.makeText(view.getContext(), "Button Send Click" , Toast.LENGTH_SHORT).show();
-                SendAction(staging + "movement", Request.Method.POST);
-                break;
+
 
 
             default:

@@ -31,6 +31,7 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
 
     private Context context;
     private List<Movement> list;
+    private int num_movement = 0;
 
     public MovementAdapter(Context context, List<Movement> list) {
         this.context = context;
@@ -81,7 +82,8 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
         }
 
 
-        public void SendAction(String URL, int RequestMethod, String movement_id, String name){
+        public void SendAction(String URL, int RequestMethod, String movement_id, String name, int num_movement){
+            final int pnum_movement = num_movement;
             final String pmovement = movement_id;
             final String pname = name;
             RequestQueue requestQueue = Volley.newRequestQueue(itemView.getContext());
@@ -102,12 +104,13 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
                     params.put("id_movement", pmovement);
+                    params.put("content", "");
                     params.put("name", pname);
+                    params.put("num_movement", String.valueOf(pnum_movement));
                     return params;
                 }
 
             };
-
             requestQueue.add(stringRequest);
 
         }
@@ -115,8 +118,11 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
         public void onClick(View view) {
 
             Toast.makeText(view.getContext(), "Click on position = " + getLayoutPosition() , Toast.LENGTH_SHORT).show();
+            num_movement = num_movement + 1 ;
+            Log.i("String00",String.valueOf(num_movement));
+
             Movement movement = list.get(getLayoutPosition());
-             SendAction("https://pepper-staging-2.herokuapp.com/movement", Request.Method.POST, Integer.toString(getLayoutPosition()), movement.getName());
+            SendAction("https://pepper-staging-2.herokuapp.com/movement", Request.Method.POST, Integer.toString(getLayoutPosition()), movement.getName(),num_movement);
 
         }
 

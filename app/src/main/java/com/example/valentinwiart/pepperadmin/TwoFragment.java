@@ -55,23 +55,29 @@ public class TwoFragment extends Fragment {
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-        request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = new JSONObject(response);
+                    Log.i("JSSON", response);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 JSONObject jsonObject2 = null;
                 try {
                     jsonObject2 = jsonObject.getJSONObject("something");
+                    Log.i("JSSON", jsonObject2.toString());
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 //Get the instance of JSONArray that contains JSONObjects
                 JSONArray jsonArray = jsonObject2.optJSONArray("questions");
+                Log.i("JSSON", jsonArray.toString());
+
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 
