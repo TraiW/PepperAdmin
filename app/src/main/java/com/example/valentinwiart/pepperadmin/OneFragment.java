@@ -12,6 +12,8 @@ import android.webkit.WebViewClient;
 
 public class OneFragment extends Fragment{
 
+
+    private String url = "https://pepper-prod.herokuapp.com/";
     public OneFragment() {
         // Required empty public constructor
     }
@@ -35,7 +37,7 @@ public class OneFragment extends Fragment{
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setDomStorageEnabled(true);
         webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
-        webview.loadUrl("https://pepper-prod.herokuapp.com/");
+        webview.loadUrl(url);
 
         return view;
     }

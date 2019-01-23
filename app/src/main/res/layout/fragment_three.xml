@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg">
 
     <Button
         android:id="@+id/xml_button_send_textToSpeech"
@@ -14,6 +15,8 @@
         android:layout_marginStart="271dp"
         android:layout_marginTop="102dp"
         android:layout_marginEnd="22dp"
+        android:background="@drawable/button_bg_rounded_corners"
+        android:textColor="@color/windowBackground"
         android:text="Send Text To Speech" />
 
     <Button
@@ -26,6 +29,9 @@
         android:layout_marginStart="225dp"
         android:layout_marginTop="313dp"
         android:layout_marginEnd="17dp"
+        android:textColor="@color/windowBackground"
+
+        android:background="@drawable/button_bg_rounded_corners"
         android:text="Start Game" />
 
     <EditText
@@ -40,7 +46,8 @@
         android:layout_marginEnd="135dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:text="Enter Text to Speech" />
+        android:textColorHint="@color/windowBackground"
+        android:hint="Enter Text to Speech" />
 
     <Button
         android:id="@+id/xml_buton_loadGame"
@@ -50,6 +57,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="38dp"
+        android:textColor="@color/windowBackground"
+
+        android:background="@drawable/button_bg_rounded_corners"
+
         android:layout_marginTop="228dp"
         android:layout_marginEnd="18dp"
         android:text="Load Game" />
@@ -64,6 +75,7 @@
         android:layout_marginStart="26dp"
         android:layout_marginTop="313dp"
         android:layout_marginEnd="180dp"
+        
         android:spinnerMode="dropdown" />
     <Button
         android:id="@+id/xml_buton_reset"
@@ -71,6 +83,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:background="@drawable/button_bg_rounded_corners"
+        android:textColor="@color/windowBackground"
+
         android:layout_alignParentEnd="true"
         android:layout_marginStart="29dp"
         android:layout_marginTop="393dp"

@@ -32,6 +32,7 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
     private Context context;
     private List<Movement> list;
     private int num_movement = 0;
+    private String url = "https://pepper-prod.herokuapp.com/";
 
     public MovementAdapter(Context context, List<Movement> list) {
         this.context = context;
@@ -122,7 +123,7 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementAdapter.ViewHo
             Log.i("String00",String.valueOf(num_movement));
 
             Movement movement = list.get(getLayoutPosition());
-            SendAction("https://pepper-staging-2.herokuapp.com/movement", Request.Method.POST, Integer.toString(getLayoutPosition()), movement.getName(),num_movement);
+            SendAction(url +"movement", Request.Method.POST, Integer.toString(getLayoutPosition()), movement.getName(),num_movement);
 
         }
 

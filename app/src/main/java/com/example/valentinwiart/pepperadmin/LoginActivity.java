@@ -133,16 +133,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
 
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(user)) {
-            mUser.setError(getString(R.string.error_field_required));
-            focusView = mUser;
-            cancel = true;
-        } else if (!isUserValid(user)) {
-            mUser.setError(getString(R.string.error_invalid_email));
-            focusView = mUser;
-            cancel = true;
-        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first

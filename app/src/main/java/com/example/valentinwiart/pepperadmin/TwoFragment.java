@@ -38,7 +38,7 @@ public class TwoFragment extends Fragment {
     private static final String TAG = "JSON";
 
 
-    private String url = "https://pepper-staging-2.herokuapp.com/json";
+    private String url = "https://pepper-prod.herokuapp.com/json";
 
 
     public TwoFragment() {

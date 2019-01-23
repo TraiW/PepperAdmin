@@ -189,25 +189,25 @@ public class ThreeFragment extends Fragment implements View.OnClickListener{
                 Toast.makeText(view.getContext(), "Button SendText Click :" +textToSpeech.getText().toString() , Toast.LENGTH_SHORT).show();
                 if (textToSpeech.getText().toString() == "")textToSpeech.setText("Bijour a touss");
                 num_movement = num_movement + 1 ;
-                SendAction(staging + "movement", Request.Method.POST,100,textToSpeech.getText().toString(),"TextToSpeech: "+textToSpeech.getText().toString(),num_movement);
+                SendAction(production + "movement", Request.Method.POST,100,textToSpeech.getText().toString(),"TextToSpeech: "+textToSpeech.getText().toString(),num_movement);
                 break;
 
             case R.id.xml_buton_startgame:
                 Toast.makeText(view.getContext(), "Button Start Click" , Toast.LENGTH_SHORT).show();
                 num_movement = num_movement + 1 ;
-                SendAction(staging + "StartGameTimer", Request.Method.POST,999,String.valueOf(nbr_questions),"Start Game",num_movement);
+                SendAction(production + "StartGameTimer", Request.Method.POST,999,String.valueOf(nbr_questions),"Start Game",num_movement);
                 break;
 
             case R.id.xml_buton_loadGame:
                 Toast.makeText(view.getContext(), "Button LoadGame Click" , Toast.LENGTH_SHORT).show();
                 num_movement = num_movement + 1 ;
-                SendAction(staging + "movement", Request.Method.POST,103,"","LoadGame",num_movement);
+                SendAction(production + "movement", Request.Method.POST,103,"","LoadGame",num_movement);
                 break;
 
             case R.id.xml_buton_reset:
                 Toast.makeText(view.getContext(), "Button Reset Click" , Toast.LENGTH_SHORT).show();
                 num_movement = num_movement + 1 ;
-                SendAction(staging + "ResetGame", Request.Method.POST,9999,"","Reset Game",num_movement);
+                SendAction(develop + "ResetGame", Request.Method.POST,9999,"","Reset Game",num_movement);
                 break;
 
 
